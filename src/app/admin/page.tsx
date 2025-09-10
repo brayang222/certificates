@@ -2,7 +2,7 @@ import { AdminComponent } from "@/components/AdminComponent"
 
 
 const AdminPage = () => {
-  return <AdminComponent/>
+  return <AdminComponent />
 }
 
 export default AdminPage
