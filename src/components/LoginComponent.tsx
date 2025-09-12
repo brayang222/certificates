@@ -1,7 +1,6 @@
 "use client";
 
 import { SUPABASE } from "@/lib/supabaseClient";
-import { User } from "@supabase/supabase-js";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -12,8 +11,6 @@ export const LoginComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const [error, setError] = useState<string | null>(null)
-  const [user, setUser] = useState<User>();
 
    const router = useRouter();
 
@@ -21,11 +18,9 @@ export const LoginComponent = () => {
         const { data, error } = await SUPABASE.auth.signInWithPassword({ email, password })
 
         if (error) {
-            setError(error.message)
             console.error(error.message)
         } else {
             const user = data.user
-            setUser(user)
             // buscar rol
             const { data: profile } = await SUPABASE
                 .from("profiles")
