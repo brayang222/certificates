@@ -55,7 +55,7 @@ export const LoginComponent = () => {
       </div>
       <div className="bg-white  rounded-lg p-8 shadow-md">
         <div className="flex items-center gap-5">
-          <img src="user.png" className="h-44" />
+          <img alt="user logo" src="user.png" className="h-44" />
           <section className="space-y-6">
             <h1 className="text-3xl font-bold text-black mb-2">
               Formulario de inicio

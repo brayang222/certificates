@@ -2,7 +2,7 @@ import { SUPABASE } from "./supabaseClient";
 
 export async function waitForProfile(userId: string, retries = 5, delay = 300) {
   for (let i = 0; i < retries; i++) {
-    const { data, error } = await SUPABASE
+    const { data } = await SUPABASE
       .from("profiles")
       .select("id")
       .eq("id", userId)

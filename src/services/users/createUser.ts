@@ -1,6 +1,5 @@
 import { Profile } from "@/app/types/users";
 import { SUPABASE } from "@/lib/supabaseClient";
-import { waitForProfile } from "@/lib/waitForUser";
 
 export async function createUser(user: Profile) {
   const { data, error } = await SUPABASE.auth.signUp({

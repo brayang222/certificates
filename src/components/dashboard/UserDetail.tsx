@@ -51,16 +51,16 @@ const UserDetail = ({id}: {id: string}) => {
         Array.from(files).forEach((file) => {
             if (file.type.startsWith('image/')) {
                 const reader = new FileReader();
-                reader.onload = (e) => {
-                    // const newImage = {
-                    //     id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
-                    //     url: e.target?.result as string,
-                    //     name: file.name,
-                    //     uploadDate: new Date().toISOString().split('T')[0]
-                    // };
-                    // setUploadedImages(prev => [...prev, newImage]);
-                };
-                reader.readAsDataURL(file);
+                // reader.onload = (e) => {
+                //     // const newImage = {
+                //     //     id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+                //     //     url: e.target?.result as string,
+                //     //     name: file.name,
+                //     //     uploadDate: new Date().toISOString().split('T')[0]
+                //     // };
+                //     // setUploadedImages(prev => [...prev, newImage]);
+                // };
+                // reader.readAsDataURL(file);
             }
         });
 

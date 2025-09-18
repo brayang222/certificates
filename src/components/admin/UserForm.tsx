@@ -15,8 +15,6 @@ export const UserForm = () => {
     status: "activo" as const,
     created_at: new Date().toISOString()
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,17 +22,14 @@ export const UserForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
 
     try {
       // console.log(form.email, form.password);
       await createUser(form);
       alert("Usuario creado con éxito 🚀");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+      console.error(err)
     }
   };
 
