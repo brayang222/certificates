@@ -1,5 +1,6 @@
 import { Profile } from "@/app/types/users";
 import { SUPABASE } from "@/lib/supabaseClient";
+import { updateUser } from "./updateUser";
 
 export async function createUser(user: Profile) {
   const { data, error } = await SUPABASE.auth.signUp({
@@ -16,21 +17,8 @@ export async function createUser(user: Profile) {
   if (!userId) {
     throw new Error("No se pudo obtener el ID del usuario creado en Auth");
   }
-
-// await waitForProfile(userId);
-
-const { error: updateError, status } = await SUPABASE
-  .from("profiles")
-  .update({
-    identification: user.identification,
-  })
-  .eq("id", userId);
-
-  console.log("status:" + status + "id:" + user.identification + "id: " + userId)
-if (updateError) {
-  console.error("Error actualizando perfil:", updateError.message);
-  throw new Error(updateError.message);
-}
+  console.log(user)
+   await updateUser(user, userId);
 
   return { success: true, userId };
 }

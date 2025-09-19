@@ -23,5 +23,5 @@ export function useUsers() {
     fetchUsers()
   }, [])
 
-  return { users, loading, error }
+  return { users, loading, error, setUsers }
 }

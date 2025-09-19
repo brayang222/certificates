@@ -10,21 +10,30 @@ export const UserForm = () => {
     direction: "",
     email: "",
     password: "",
-    id: "",
-    role: 'student' as const,
-    status: "activo" as const,
+    university: "",
+    discharge_date: "",
+    text: "",  
+    downloads: "desactivadas",  
+    role: "usuario",
+    status: "en_proceso",
     created_at: new Date().toISOString()
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+) => {
+  const { name, value } = e.target;
+  setForm((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+  console.log(form)
+};
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      // console.log(form.email, form.password);
       await createUser(form);
       alert("Usuario creado con éxito 🚀");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -61,11 +70,15 @@ export const UserForm = () => {
       </div>
       <div className="flex flex-col gap-1">
         <label className='font-semibold'>Texto</label>
-        <input type="text" name="" id="" className="border rounded-sm border-black p-1" onChange={handleChange}/>
+        <input type="text" name="text" id="text" className="border rounded-sm border-black p-1" onChange={handleChange}/>
       </div>
       <div className="flex flex-col gap-1">
-        <label className='font-semibold'>Llave</label>
-        <input type="text" name="key" id="key" className="border rounded-sm border-black p-1" onChange={handleChange}/>
+        <label className='font-semibold'>Universidad</label>
+        <input type="text" name="university" id="university" className="border rounded-sm border-black p-1" onChange={handleChange}/>
+      </div>
+      <div className="flex flex-col gap-1">
+        <label className='font-semibold'>Fecha de egreso</label>
+        <input type="date" name="discharge_date" id="discharge_date" className="border rounded-sm border-black p-1" onChange={handleChange}/>
       </div>
       <div className="flex flex-col gap-1">
         <label className='font-semibold'>Contraseña</label>
@@ -73,23 +86,25 @@ export const UserForm = () => {
       </div>
       <div className="flex flex-col gap-1">
         <label className='font-semibold'>Estado</label>
-        <select name="status" className="font-semibold border rounded-sm border-black p-1" >
-          <option >Activo</option>
-          <option>Inactivo</option>
+        <select defaultValue="en_proceso" name="status" id="status" className="font-semibold border rounded-sm border-black p-1" onChange={handleChange}>
+          <option value="en_proceso" >En proceso</option>
+          <option value="activo">Activo</option>
+          <option value="inactivo">Inactivo</option>
+          <option value="graduado">Graduado</option>
         </select>
       </div>
       <div className="flex flex-col gap-1">
         <label className='font-semibold'>Descargas</label>
-        <select name="Rol" className="font-semibold border rounded-sm border-black p-1">
-          <option value="active">Activadas</option>
-          <option value="desactived">Desactivadas</option>
+        <select defaultValue="desactivadas" name="downloads" id="downloads" className="font-semibold border rounded-sm border-black p-1" onChange={handleChange}>
+          <option value="desactivadas" >Desactivadas</option>
+          <option value="activadas">Activadas</option>
         </select>
       </div>
       <div className="flex flex-col gap-1">
         <label className='font-semibold'>Rol</label>
-        <select name="Rol" className="font-semibold border rounded-sm border-black p-1">
-          <option >Usuario</option>
-          <option>Administrador</option>
+        <select defaultValue="usuario" name="role" id="role" className="font-semibold border rounded-sm border-black p-1" onChange={handleChange}>
+          <option value="usuario">Usuario</option>
+          <option value="administrador">Administrador</option>
         </select>
       </div>
       <button

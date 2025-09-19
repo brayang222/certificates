@@ -2,14 +2,18 @@ export interface Profile {
   id?: string;
   identification?: string;
   password?: string;
+  name?: string;
+  lastname?: string;
   full_name?: string | undefined;
   email: string | null;
-  role?: "admin" | "student";
-  status?: "activo" | "inactivo";
+  university?: string;
+  discharge_date?: Date | string;
+  role?: string;
+  status?: string;
   phone?: string;
   direction?:string;
   key?: string;
-  downloads?: "active" | "desactived";
+  downloads?: string;
   avatar_url?: string | null;
   created_at?: string;
 }
