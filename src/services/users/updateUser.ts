@@ -15,7 +15,7 @@ export async function updateUser(user: Profile, userId?: string) {
 
   console.log(status);
   if (updateError) {
-    console.error("Error actualizando perfil:", updateError.message);
+    console.error("Error actualizando perfil:", updateError.message, password);
     console.log(status);
     throw new Error(updateError.message);
   }

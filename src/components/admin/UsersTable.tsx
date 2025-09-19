@@ -12,6 +12,7 @@ export const UsersTable = () => {
     try {
       await deleteUser(id);
       setUsers((prev) => prev.filter((u) => u.id !== id));
+       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error(err.message);
       alert("No se pudo eliminar el usuario");
