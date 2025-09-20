@@ -1,4 +1,4 @@
-import { Profile } from "@/app/types/users"
+import { Profile } from "@/types/users"
 import { SUPABASE } from "@/lib/supabaseClient"
 
 export async function getAllUsers(): Promise<Profile[]> {

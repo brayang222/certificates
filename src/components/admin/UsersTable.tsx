@@ -1,5 +1,5 @@
 "use client"
-import { useUsers } from '@/app/hooks/useUsers'
+import { useUsers } from '@/hooks/useUsers'
 import { deleteUser } from '@/services/users/deleteUser';
 
 export const UsersTable = () => {
@@ -43,7 +43,7 @@ export const UsersTable = () => {
             <td className="border border-black px-2 py-1">{user.email}</td>
             <td className="border border-black px-2 py-1">{user.status}</td>
             <td className="border border-black px-2 py-1">{user.downloads}</td>
-            <td className="border border-black bg-amber-400 px-2 py-1">Ver</td>
+            <td className="border border-black bg-amber-400 px-2 py-1 cursor-pointer" onClick={() => { window.location.href = `admin/user-view/${user.email}`; }}>Ver</td>
             <td className="border border-black bg-red-500 px-2 py-1 text-white cursor-pointer"
               onClick={() => handleDelete(user.id as string)}>
               Eliminar

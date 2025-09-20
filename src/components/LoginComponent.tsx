@@ -20,7 +20,7 @@ export const LoginComponent = () => {
       console.error(error.message)
     } else {
       const user = data.user
-      // buscar rol
+
       const { data: profile } = await SUPABASE
         .from("profiles")
         .select("role")
@@ -28,7 +28,7 @@ export const LoginComponent = () => {
         .single()
 
       if (profile?.role === "admin") {
-        router.push("/admin")
+        router.push("/admin");
       } else {
         router.push("/estudiante")
       }
