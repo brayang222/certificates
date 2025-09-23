@@ -1,39 +1,43 @@
 "use client";
 
-import { SUPABASE } from "@/lib/supabaseClient";
+import { errorHandler } from "@/lib/errorHandler";
+import { createClient } from "@/utils/supabase/client";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-
 export const LoginComponent = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const supabase = createClient();
 
   const router = useRouter();
 
   const handleLogin = async () => {
-    const { data, error } = await SUPABASE.auth.signInWithPassword({ email, password })
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
     if (error) {
-      console.error(error.message)
+      errorHandler(error);
     } else {
-      const user = data.user
+      const user = data.user;
 
-      const { data: profile } = await SUPABASE
+      const { data: profile } = await supabase
         .from("profiles")
         .select("role")
         .eq("id", user.id)
-        .single()
+        .single();
 
       if (profile?.role === "admin") {
         router.push("/admin");
       } else {
-        router.push("/estudiante")
+        router.push(`/student/${user.email}`);
       }
     }
-  }
+  };
 
   return (
     <div className="w-full h-[100vh] mx-auto flex flex-col items-center">
@@ -61,7 +65,10 @@ export const LoginComponent = () => {
               Formulario de inicio
             </h1>
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 my-4">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 my-4"
+              >
                 Correo electrónico
               </label>
               <div className="relative">
@@ -79,14 +86,17 @@ export const LoginComponent = () => {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Contraseña
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   id="password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   placeholder="Ingresa tu contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -108,7 +118,7 @@ export const LoginComponent = () => {
             </div>
             <button
               onClick={handleLogin}
-              className="w-full bg-blue-900 text-white py-3 px-4 rounded-md hover:bg-gray-800 transition-all duration-200 font-medium"
+              className="w-full bg-blue-900 text-white py-3 px-4 rounded-md hover:bg-gray-800 transition-all duration-200 font-medium cursor-pointer"
             >
               Iniciar
             </button>

@@ -3,18 +3,18 @@ export interface Profile {
   identification?: string;
   password?: string;
   name?: string;
-  lastname?: string;
+  lastName?: string;
   full_name?: string | undefined;
-  email: string | null;
+  email: string;
   university?: string;
-  discharge_date?: Date | string;
+  discharge_date?: string;
   role?: string;
   status?: string;
   phone?: string;
-  direction?:string;
+  direction?: string;
   key?: string;
   downloads?: string;
   avatar_url?: string | null;
   created_at?: string;
+  text?: string;
 }
-

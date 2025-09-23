@@ -1,15 +1,17 @@
 import { Profile } from "@/types/users";
-import { SUPABASE } from "@/lib/supabaseClient";
+import { createClient } from "@/utils/supabase/client";
 
 export async function updateUser(user: Profile, userId?: string) {
-  const {password, name, lastname, ...rest } = user;
+  const { password, name, lastName, ...rest } = user;
+  const supabase = createClient();
 
   const data = {
     ...rest,
-    full_name: `${name} ${lastname}`.trim(),
+    full_name: `${name} ${lastName}`.trim(),
   };
 
-  const { error: updateError, status } = await SUPABASE.from("profiles")
+  const { error: updateError, status } = await supabase
+    .from("profiles")
     .update(data)
     .eq("id", userId ?? user.id);
 

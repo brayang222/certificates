@@ -1,27 +1,26 @@
-import { getAllUsers } from "@/services/users/getAllUsers"
-import { useEffect, useState } from "react"
-import { Profile } from "../types/users"
+import { getAllUsers } from "@/services/users/getAllUsers";
+import { useEffect, useState } from "react";
+import { Profile } from "../types/users";
+import { errorHandler } from "@/lib/errorHandler";
 
 export function useUsers() {
-  const [users, setUsers] = useState<Profile[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [users, setUsers] = useState<Profile[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const data = await getAllUsers()
-        setUsers(data)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (err: any) {
-        setError(err.message)
+        const data = await getAllUsers();
+        setUsers(data);
+      } catch (err: unknown) {
+        errorHandler(err);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchUsers()
-  }, [])
+    fetchUsers();
+  }, []);
 
-  return { users, loading, error, setUsers }
+  return { users, loading, setUsers };
 }

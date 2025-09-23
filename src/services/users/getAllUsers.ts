@@ -1,15 +1,16 @@
-import { Profile } from "@/types/users"
-import { SUPABASE } from "@/lib/supabaseClient"
+import { Profile } from "@/types/users";
+import { createClient } from "@/utils/supabase/client";
 
 export async function getAllUsers(): Promise<Profile[]> {
-  const { data, error } = await SUPABASE
+  const supabase = createClient();
+  const { data, error } = await supabase
     .from("profiles")
     .select("*")
-    .order("created_at", { ascending: false })
+    .order("created_at", { ascending: false });
 
   if (error) {
-    console.error("Error trayendo usuarios:", error.message)
-    throw new Error(error.message)
+    console.error("Error trayendo usuarios:", error.message);
+    throw new Error(error.message);
   }
 
   return data as Profile[];
