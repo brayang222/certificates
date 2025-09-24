@@ -14,6 +14,7 @@ export function errorHandler(error: unknown) {
     const translated =
       errorMessages[error.message] || "Ocurrió un error inesperado.";
     console.error("Error:", error.message);
+
     alert(`⚠️ ${translated}`);
   } else {
     console.error("Error inesperado:", error);

@@ -13,7 +13,7 @@ export const UserForm = ({ user }: { user?: Profile }) => {
     name: user ? user.full_name?.split(" ")[0] : "",
     lastName: user ? user.full_name?.split(" ")[1] : "",
     phone: "",
-    direction: "",
+    address: "",
     email: "",
     password: "",
     university: "",
@@ -81,112 +81,142 @@ export const UserForm = ({ user }: { user?: Profile }) => {
           onChange={handleChange}
         />
       </div>
-      <div className="flex flex-col gap-1 w-80">
-        <label className="font-semibold">Nombre</label>
+      <div className="flex flex-col gap-1">
+        <label className="font-semibold" htmlFor="name">
+          Nombre
+        </label>
         <input
           value={form.name}
           type="text"
           name="name"
           id="name"
+          autoComplete="name"
           className="border rounded-sm border-black p-1"
           onChange={handleChange}
         />
       </div>
       <div className="flex flex-col gap-1">
-        <label className="font-semibold">Apellido</label>
+        <label className="font-semibold" htmlFor="lastName">
+          Apellido
+        </label>
         <input
           value={form.lastName}
           type="text"
           name="lastName"
           id="lastName"
+          autoComplete="lastName"
           className="border rounded-sm border-black p-1"
           onChange={handleChange}
         />
       </div>
       <div className="flex flex-col gap-1">
-        <label className="font-semibold">Teléfono</label>
+        <label className="font-semibold" htmlFor="phone">
+          Teléfono
+        </label>
         <input
           value={form.phone}
           type="text"
           name="phone"
           id="phone"
+          autoComplete="phone"
           className="border rounded-sm border-black p-1"
           onChange={handleChange}
         />
       </div>
       <div className="flex flex-col gap-1">
-        <label className="font-semibold">Dirección</label>
+        <label className="font-semibold" htmlFor="address">
+          Dirección
+        </label>
         <input
-          value={form.direction}
+          value={form.address}
           type="text"
-          name="direction"
-          id="direction"
+          name="address"
+          id="address"
+          autoComplete="address"
           className="border rounded-sm border-black p-1"
           onChange={handleChange}
         />
       </div>
       <div className="flex flex-col gap-1">
-        <label className="font-semibold">Correo</label>
+        <label className="font-semibold" htmlFor="email">
+          Correo
+        </label>
         <input
           value={form.email}
           name="email"
           id="email"
+          autoComplete="email"
           type="text"
           className="border rounded-sm border-black p-1"
           onChange={handleChange}
         />
       </div>
       <div className="flex flex-col gap-1">
-        <label className="font-semibold">Texto</label>
+        <label className="font-semibold" htmlFor="text">
+          Texto
+        </label>
         <input
           value={form.text}
           type="text"
           name="text"
+          autoComplete="text"
           id="text"
           className="border rounded-sm border-black p-1"
           onChange={handleChange}
         />
       </div>
       <div className="flex flex-col gap-1">
-        <label className="font-semibold">Universidad</label>
+        <label className="font-semibold" htmlFor="university">
+          Universidad
+        </label>
         <input
           value={form.university}
           type="text"
           name="university"
           id="university"
+          autoComplete="university"
           className="border rounded-sm border-black p-1"
           onChange={handleChange}
         />
       </div>
       <div className="flex flex-col gap-1">
-        <label className="font-semibold">Fecha de egreso</label>
+        <label className="font-semibold" htmlFor="discharge_date">
+          Fecha de egreso
+        </label>
         <input
           value={form.discharge_date}
           type="date"
           name="discharge_date"
           id="discharge_date"
+          autoComplete="discharge_date"
           className="border rounded-sm border-black p-1"
           onChange={handleChange}
         />
       </div>
       <div className="flex flex-col gap-1">
-        <label className="font-semibold">Contraseña</label>
+        <label className="font-semibold" htmlFor="password">
+          Contraseña
+        </label>
         <input
           value={form.password}
           minLength={6}
           name="password"
           id="password"
+          autoComplete="password"
           type="text"
           className="border rounded-sm border-black p-1"
           onChange={handleChange}
         />
       </div>
       <div className="flex flex-col gap-1">
-        <label className="font-semibold">Estado</label>
+        <label className="font-semibold" htmlFor="status">
+          Estado
+        </label>
         <select
           value={form.status}
           name="status"
           id="status"
+          autoComplete="status"
           className="font-semibold border rounded-sm border-black p-1"
           onChange={handleChange}
         >

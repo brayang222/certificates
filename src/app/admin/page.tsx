@@ -1,7 +1,7 @@
-import { Admin } from "@/components/admin/Admin"
+import { Admin } from "@/components/admin/Admin";
 
-const AdminPage = () => {
-  return <Admin />
+async function AdminPage() {
+  return <Admin />;
 }
 
-export default AdminPage
+export default AdminPage;
