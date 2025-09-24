@@ -5,7 +5,7 @@ import { getUserByEmail } from "@/services/users/getUserByEmail";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
-async function GalleryPage({ params }: { params: { email: string } }) {
+async function GalleryPage() {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
 

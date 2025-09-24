@@ -4,12 +4,6 @@ import { BackButton } from "../BackButton";
 import { getCertificates } from "@/services/buckets/getCertificates";
 import { Profile } from "@/types/users";
 
-interface Certificate {
-  id: number;
-  image: string;
-  filename: string;
-}
-
 export function Gallery({ user }: { user: Profile }) {
   const [selectedCertificate, setSelectedCertificate] = useState<string>("");
   const [certificates, setCertificates] = useState<string[]>([]);
