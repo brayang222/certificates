@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { BackButton } from "../BackButton";
 import { getCertificates } from "@/services/buckets/getCertificates";
 import { Profile } from "@/types/users";
+import { SignOutButton } from "../SignOutButton";
 
 export function Gallery({ user }: { user: Profile }) {
   const [selectedCertificate, setSelectedCertificate] = useState<string>("");
@@ -16,12 +17,19 @@ export function Gallery({ user }: { user: Profile }) {
     setSelectedCertificate("");
   };
 
-  const downloadImage = (imageUrl: string) => {
-    const link = document.createElement("a");
-    link.href = imageUrl;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownload = async (url: string, filename: string) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const blobUrl = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    URL.revokeObjectURL(blobUrl);
   };
 
   useEffect(() => {
@@ -34,10 +42,13 @@ export function Gallery({ user }: { user: Profile }) {
 
   return (
     <section className="min-h-screen p-4 flex flex-col gap-6 items-center">
-      <BackButton />
+      <div className="w-full flex justify-evenly items-center">
+        <BackButton />
+        <SignOutButton />
+      </div>
       <h2 className="text-3xl font-bold">Galeria de imagenes</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {certificates.length > 0 ? (
+        {certificates.length > 0 && user.downloads === "activadas" ? (
           certificates.map((certificate) => (
             <div key={certificate} className="relative group">
               <div
@@ -54,16 +65,16 @@ export function Gallery({ user }: { user: Profile }) {
                 />
               </div>
 
-              <button
+              <a
                 onClick={(e) => {
                   e.stopPropagation();
-                  downloadImage(certificate);
+                  handleDownload(certificate, `certificado-${Date.now()}.png`);
                 }}
                 className="absolute bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-blue-900 cursor-pointer"
                 style={{ transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)" }}
               >
                 Descargar
-              </button>
+              </a>
             </div>
           ))
         ) : (
@@ -94,7 +105,12 @@ export function Gallery({ user }: { user: Profile }) {
             </button>
 
             <button
-              onClick={() => downloadImage(selectedCertificate)}
+              onClick={() =>
+                handleDownload(
+                  selectedCertificate,
+                  `certificado-${Date.now()}.png`
+                )
+              }
               className="absolute bottom-4 right-4 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-900 cursor-pointer"
             >
               Descargar

@@ -1,9 +1,13 @@
 import { createClient } from "@/utils/supabase/client";
+import { deleteUserBuckets } from "../buckets/deleteUserBuckets";
+import { deleteFile } from "../buckets/deleteFile";
 
 export async function deleteUser(userId: string) {
   const supabase = createClient();
 
   const { error } = await supabase.from("profiles").delete().eq("id", userId);
+  await deleteUserBuckets(userId);
+  await deleteFile(userId);
 
   if (error) {
     console.error("Error actualizando perfil:", error.message);

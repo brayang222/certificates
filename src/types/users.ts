@@ -11,7 +11,7 @@ export interface Profile {
   role?: string;
   status?: string;
   phone?: string;
-  direction?: string;
+  address?: string;
   key?: string;
   downloads?: string;
   avatar_url?: string | null;

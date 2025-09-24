@@ -32,7 +32,7 @@ export const UserInformation = ({ user }: { user: Profile }) => {
         </p>
         <p className="text-lg">
           <span className="font-bold">Direccion: </span>
-          {user?.direction}
+          {user?.address}
         </p>
         <p className="text-lg">
           <span className="font-bold">Telefono: </span>

@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/client";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { BannerLogos } from "./BannerLogos";
 
 export const LoginComponent = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -41,22 +42,7 @@ export const LoginComponent = () => {
 
   return (
     <div className="w-full h-[100vh] mx-auto flex flex-col items-center">
-      <div className="grid grid-cols-2 gap-4 w-full my-10">
-        <div className="flex justify-center items-center">
-          <img
-            alt="logo ministerio de educación"
-            src="educacion.webp"
-            className="max-h-32 w-auto object-contain"
-          />
-        </div>
-        <div className="flex justify-center items-center">
-          <img
-            alt="logo snies"
-            src="snies.png"
-            className="max-h-32 w-auto object-contain"
-          />
-        </div>
-      </div>
+      <BannerLogos />
       <div className="bg-white  rounded-lg p-8 shadow-md">
         <div className="flex items-center gap-5">
           <img alt="user logo" src="user.png" className="h-44" />

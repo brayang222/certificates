@@ -1,7 +1,7 @@
 "use client";
-import { deleteFile } from "@/services/buckets/deleteFile";
 import { uploadCertificates } from "@/services/buckets/uploadCertificates";
 import { uploadFile } from "@/services/buckets/uploadFile";
+import { deleteAvatar } from "@/services/users/deleteAvatar";
 import { Profile } from "@/types/users";
 import { useRef } from "react";
 
@@ -13,7 +13,7 @@ export const UploadingImages = ({ user }: { user: Profile }) => {
     const file = profileInputRef.current?.files?.[0];
     if (!file) return alert("No seleccionaste ninguna imagen de perfil");
     if (user.avatar_url) {
-      deleteFile(user.id!);
+      deleteAvatar(user.id!);
     } else {
     }
     await uploadFile(file, user.id!);

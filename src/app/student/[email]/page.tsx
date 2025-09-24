@@ -1,3 +1,4 @@
+import { BannerLogos } from "@/components/BannerLogos";
 import { UserInformation } from "@/components/user/UserInformation";
 import { getUserByEmail } from "@/services/users/getUserByEmail";
 import { createClient } from "@/utils/supabase/server";
@@ -16,6 +17,7 @@ export default async function StudentsPage() {
 
   return (
     <main className="flex h-screen w-full flex-col items-center justify-center gap-5 p-10">
+      <BannerLogos />
       <UserInformation user={user!} />
       <a
         className="w-60 bg-green-500 text-white text-lg px-4 py-2 rounded-md cursor-pointer"
