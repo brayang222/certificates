@@ -15,6 +15,7 @@ export async function createUser(user: Profile) {
 
   if (error) {
     console.error(error);
+    return { success: false, error };
   }
 
   const userId = data.user?.id;

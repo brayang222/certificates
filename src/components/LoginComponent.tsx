@@ -1,11 +1,11 @@
 "use client";
 
-import { errorHandler } from "@/lib/errorHandler";
 import { createClient } from "@/utils/supabase/client";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BannerLogos } from "./BannerLogos";
+import { errorHandler } from "@/hooks/useErrorHanlder";
 
 export const LoginComponent = () => {
   const [showPassword, setShowPassword] = useState(false);

@@ -11,8 +11,7 @@ export async function deleteUser(userId: string) {
 
   if (error) {
     console.error("Error actualizando perfil:", error.message);
-    console.log(status);
-    throw new Error(error.message);
+    return { success: false, error };
   }
 
   return { success: true, userId };

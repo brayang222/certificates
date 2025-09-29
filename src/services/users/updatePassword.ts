@@ -13,6 +13,6 @@ export async function adminUpdatePassword(userId: string, newPassword: string) {
     }
   );
 
-  if (error) throw error;
+  if (error) return { success: false, error };
   return data;
 }

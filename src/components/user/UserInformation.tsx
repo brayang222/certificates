@@ -1,5 +1,4 @@
 import { Profile } from "@/types/users";
-import React from "react";
 
 export const UserInformation = ({ user }: { user: Profile }) => {
   const [nombre, apellido] = user?.full_name?.split(" ") || [""];
@@ -9,7 +8,11 @@ export const UserInformation = ({ user }: { user: Profile }) => {
       <h2 className="text-2xl font-bold">Perfil de usuario</h2>
       <div className="flex w-50 h-50 bg-gray-300 rounded-full items-center justify-center">
         <img
-          src={`${user.avatar_url}?t=${Date.now()}` || "/user.png"}
+          src={
+            user?.avatar_url
+              ? `${user.avatar_url}?t=${Date.now()}`
+              : "/user.png"
+          }
           className="w-full h-full p-2 rounded-full object-cover"
         />
       </div>
@@ -46,6 +49,14 @@ export const UserInformation = ({ user }: { user: Profile }) => {
           <span className="font-bold">Universidad: </span>
           {user?.university}
         </p>
+        {user.discharge_date ? (
+          <p className="text-lg">
+            <span className="font-bold">Fecha de egreso: </span>
+            {user?.discharge_date}
+          </p>
+        ) : (
+          <></>
+        )}
         <p className="text-xl text-gray-600 max-w-[65ch]">{user?.text}</p>
       </div>
     </>

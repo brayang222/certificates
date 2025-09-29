@@ -1,5 +1,5 @@
 "use client";
-import { errorHandler } from "@/lib/errorHandler";
+import { errorHandler } from "@/hooks/useErrorHanlder";
 import { createUser } from "@/services/users/createUser";
 import { adminUpdatePassword } from "@/services/users/updatePassword";
 import { updateUser } from "@/services/users/updateUser";

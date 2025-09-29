@@ -16,7 +16,7 @@ export default async function StudentsPage() {
   }
 
   return (
-    <main className="flex h-screen w-full flex-col items-center justify-center gap-5 p-10">
+    <main className="flex h-full w-full flex-col items-center justify-center gap-5 p-10">
       <BannerLogos />
       <UserInformation user={user!} />
       <a

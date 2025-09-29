@@ -1,14 +1,18 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import React from "react";
 
 export const BackButton = () => {
+  const router = useRouter();
+
   return (
-    <a
-      className="flex flex-row gap-2 bg-blue-500 cursor-pointer px-4 py-2 text-white font-bold rounded-sm "
-      href="/admin"
+    <button
+      onClick={() => router.back()}
+      className="flex flex-row gap-2 bg-blue-500 cursor-pointer px-4 py-2 text-white font-bold rounded-sm"
     >
       <ArrowLeft />
       Regresar
-    </a>
+    </button>
   );
 };

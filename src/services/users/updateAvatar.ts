@@ -1,4 +1,3 @@
-import { errorHandler } from "@/lib/errorHandler";
 import { createClient } from "@/utils/supabase/client";
 
 export async function updateAvatar(fileUrl: string, userId?: string) {
@@ -10,7 +9,7 @@ export async function updateAvatar(fileUrl: string, userId?: string) {
     .eq("id", userId);
 
   if (updateError) {
-    errorHandler(updateError);
+    return { success: false, updateError };
   }
 
   return { success: true, fileUrl };

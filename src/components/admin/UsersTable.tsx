@@ -1,6 +1,6 @@
 "use client";
+import { errorHandler } from "@/hooks/useErrorHanlder";
 import { useUsers } from "@/hooks/useUsers";
-import { errorHandler } from "@/lib/errorHandler";
 import { deleteUser } from "@/services/users/deleteUser";
 
 export const UsersTable = () => {

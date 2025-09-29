@@ -1,7 +1,7 @@
 import { getAllUsers } from "@/services/users/getAllUsers";
 import { useEffect, useState } from "react";
 import { Profile } from "../types/users";
-import { errorHandler } from "@/lib/errorHandler";
+import { errorHandler } from "./useErrorHanlder";
 
 export function useUsers() {
   const [users, setUsers] = useState<Profile[]>([]);

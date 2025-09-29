@@ -1,7 +1,6 @@
 "use server";
 
 import { SUPABASE_SERVICE_ROLE_KEY, SUPABASE_URL } from "@/constants";
-import { errorHandler } from "@/lib/errorHandler";
 import { createClient } from "@supabase/supabase-js";
 
 export async function deleteFile(userId: string) {
@@ -12,7 +11,7 @@ export async function deleteFile(userId: string) {
     .remove([userId]);
 
   if (error) {
-    errorHandler(error);
+    return { success: false, error };
   } else {
     console.log(data);
   }

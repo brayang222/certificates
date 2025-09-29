@@ -1,9 +1,11 @@
 "use client";
+import { errorHandler } from "@/hooks/useErrorHanlder";
 import { uploadCertificates } from "@/services/buckets/uploadCertificates";
 import { uploadFile } from "@/services/buckets/uploadFile";
 import { deleteAvatar } from "@/services/users/deleteAvatar";
 import { Profile } from "@/types/users";
 import { useRef } from "react";
+import { toast } from "sonner";
 
 export const UploadingImages = ({ user }: { user: Profile }) => {
   const profileInputRef = useRef<HTMLInputElement>(null);
@@ -13,10 +15,17 @@ export const UploadingImages = ({ user }: { user: Profile }) => {
     const file = profileInputRef.current?.files?.[0];
     if (!file) return alert("No seleccionaste ninguna imagen de perfil");
     if (user.avatar_url) {
-      deleteAvatar(user.id!);
-    } else {
+      await deleteAvatar(user.id!);
+      console.log("Avatar eliminado:", user.avatar_url);
     }
-    await uploadFile(file, user.id!);
+    try {
+      const res = await uploadFile(file, user.id!);
+      if (res!.success) {
+        toast.success("Imagen subida, recarga la pagina");
+      }
+    } catch (error) {
+      errorHandler(error);
+    }
   }
 
   async function handleUploadCertificates() {
@@ -24,8 +33,8 @@ export const UploadingImages = ({ user }: { user: Profile }) => {
     if (!files || files.length === 0)
       return alert("No seleccionaste certificados");
 
-    const urls = await uploadCertificates(Array.from(files), user.id!);
-    console.log("Certificados subidos:", urls);
+    await uploadCertificates(Array.from(files), user.id!);
+    toast.success("Certificados subidos con exito");
   }
 
   return (
