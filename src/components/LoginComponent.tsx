@@ -5,7 +5,8 @@ import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BannerLogos } from "./BannerLogos";
-import { errorHandler } from "@/hooks/useErrorHanlder";
+import { errorHandler } from "@/hooks/useErrorHandler";
+import { toast } from "sonner";
 
 export const LoginComponent = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +21,7 @@ export const LoginComponent = () => {
       email,
       password,
     });
+    toast.info("Ingresando a la cuenta, por favor espere");
 
     if (error) {
       errorHandler(error);
@@ -34,8 +36,11 @@ export const LoginComponent = () => {
 
       if (profile?.role === "admin") {
         router.push("/admin");
+        toast.success(`Bienvenido Administrador`);
       } else {
+        console.log(profile?.role);
         router.push(`/student/${user.email}`);
+        toast.success(`Bienvenido, ${user.email}`);
       }
     }
   };

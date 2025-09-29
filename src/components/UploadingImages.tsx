@@ -1,5 +1,5 @@
 "use client";
-import { errorHandler } from "@/hooks/useErrorHanlder";
+import { errorHandler } from "@/hooks/useErrorHandler";
 import { uploadCertificates } from "@/services/buckets/uploadCertificates";
 import { uploadFile } from "@/services/buckets/uploadFile";
 import { deleteAvatar } from "@/services/users/deleteAvatar";

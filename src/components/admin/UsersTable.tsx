@@ -1,7 +1,8 @@
 "use client";
-import { errorHandler } from "@/hooks/useErrorHanlder";
+import { errorHandler } from "@/hooks/useErrorHandler";
 import { useUsers } from "@/hooks/useUsers";
 import { deleteUser } from "@/services/users/deleteUser";
+import { toast } from "sonner";
 
 export const UsersTable = () => {
   const { users, setUsers } = useUsers();
@@ -14,6 +15,7 @@ export const UsersTable = () => {
 
     try {
       await deleteUser(id);
+      toast.warning("Usuario eliminado con exito");
       setUsers((prev) => prev.filter((u) => u.id !== id));
     } catch (err: unknown) {
       errorHandler(err);

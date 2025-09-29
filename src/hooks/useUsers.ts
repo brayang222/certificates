@@ -1,26 +1,27 @@
 import { getAllUsers } from "@/services/users/getAllUsers";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Profile } from "../types/users";
-import { errorHandler } from "./useErrorHanlder";
+import { errorHandler } from "./useErrorHandler";
 
 export function useUsers() {
   const [users, setUsers] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const data = await getAllUsers();
-        setUsers(data);
-      } catch (err: unknown) {
-        errorHandler(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUsers();
+  const fetchUsers = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await getAllUsers();
+      setUsers(data);
+    } catch (err: unknown) {
+      errorHandler(err);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  return { users, loading, setUsers };
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  return { users, loading, setUsers, refetch: fetchUsers };
 }

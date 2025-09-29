@@ -10,10 +10,10 @@ export const Admin = () => {
       </nav>
       <section className="flex flex-row gap-4 p-8 w-full max-w-screen h-fit mb-10 items-start justify-evenly">
         <div className="flex flex-col gap-4 ">
-          <form className="flex flex-col gap-4 min-w-sm px-4">
+          <div className="flex flex-col gap-4 min-w-sm px-4">
             <SignOutButton />
             <UserForm />
-          </form>
+          </div>
         </div>
         <UsersTable />
       </section>
