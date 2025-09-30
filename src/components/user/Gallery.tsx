@@ -4,8 +4,15 @@ import { BackButton } from "../BackButton";
 import { getCertificates } from "@/services/buckets/getCertificates";
 import { Profile } from "@/types/users";
 import { SignOutButton } from "../SignOutButton";
+import DeleteCertificates from "../admin/DeleteCertificates";
 
-export function Gallery({ user }: { user: Profile }) {
+export function Gallery({
+  user,
+  isAdmin,
+}: {
+  user: Profile;
+  isAdmin?: boolean;
+}) {
   const [selectedCertificate, setSelectedCertificate] = useState<string>("");
   const [certificates, setCertificates] = useState<string[]>([]);
 
@@ -43,12 +50,22 @@ export function Gallery({ user }: { user: Profile }) {
   return (
     <section className="min-h-screen p-4 flex flex-col gap-6 items-center">
       <div className="w-full flex justify-evenly items-center">
-        <BackButton />
-        <SignOutButton />
+        {isAdmin ? (
+          <DeleteCertificates
+            userId={user.id as string}
+            count={certificates.length}
+          />
+        ) : (
+          <>
+            <BackButton />
+            <SignOutButton />
+          </>
+        )}
       </div>
       <h2 className="text-3xl font-bold">Galeria de imagenes</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {certificates.length > 0 && user.downloads === "activadas" ? (
+        {(certificates.length > 0 && user.downloads === "activadas") ||
+        (certificates.length > 0 && isAdmin) ? (
           certificates.map((certificate) => (
             <div key={certificate} className="relative group">
               <div

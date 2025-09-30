@@ -3,7 +3,7 @@ export interface Profile {
   identification?: string;
   password?: string;
   name?: string;
-  lastName?: string;
+  lastname?: string;
   full_name?: string | undefined;
   email: string;
   university?: string;

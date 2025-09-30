@@ -34,7 +34,8 @@ export const UploadingImages = ({ user }: { user: Profile }) => {
       return alert("No seleccionaste certificados");
 
     await uploadCertificates(Array.from(files), user.id!);
-    toast.success("Certificados subidos con exito");
+    window.location.reload();
+    toast.success("Certificados subidos con éxito");
   }
 
   return (

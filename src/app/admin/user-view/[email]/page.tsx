@@ -1,5 +1,6 @@
 import { BackButton } from "@/components/BackButton";
 import { UploadingImages } from "@/components/UploadingImages";
+import { Gallery } from "@/components/user/Gallery";
 import { UserInformation } from "@/components/user/UserInformation";
 import { getUserByEmail } from "@/services/users/getUserByEmail";
 
@@ -19,6 +20,7 @@ async function UserViewPage({ params }: { params: { email: string } }) {
         Editar datos usuario
       </a>
       <UploadingImages user={user!} />
+      <Gallery user={user!} isAdmin={true} />
     </main>
   );
 }

@@ -1,8 +1,6 @@
 import { Profile } from "@/types/users";
 
 export const UserInformation = ({ user }: { user: Profile }) => {
-  const [nombre, apellido] = user?.full_name?.split(" ") || [""];
-
   return (
     <>
       <h2 className="text-2xl font-bold">Perfil de usuario</h2>
@@ -23,11 +21,11 @@ export const UserInformation = ({ user }: { user: Profile }) => {
         </p>
         <p className="text-lg">
           <span className="font-bold">Nombre: </span>
-          {nombre?.charAt(0).toUpperCase() + nombre?.slice(1)}
+          {user.name}
         </p>
         <p className="text-lg">
           <span className="font-bold">Apellido: </span>
-          {apellido?.charAt(0).toUpperCase() + apellido?.slice(1)}
+          {user.lastname}
         </p>
         <p className="text-lg">
           <span className="font-bold">Cedula: </span>
@@ -49,13 +47,11 @@ export const UserInformation = ({ user }: { user: Profile }) => {
           <span className="font-bold">Universidad: </span>
           {user?.university}
         </p>
-        {user.discharge_date ? (
+        {user && user.discharge_date && (
           <p className="text-lg">
             <span className="font-bold">Fecha de egreso: </span>
-            {user?.discharge_date}
+            {user.discharge_date}
           </p>
-        ) : (
-          <></>
         )}
         <p className="text-xl text-gray-600 max-w-[65ch]">{user?.text}</p>
       </div>

@@ -2,12 +2,14 @@ import { Profile } from "@/types/users";
 import { createClient } from "@/utils/supabase/client";
 
 export async function updateUser(user: Profile, userId?: string) {
-  const { password, name, lastName, discharge_date, ...rest } = user;
+  const { password, name, lastname, discharge_date, ...rest } = user;
   const supabase = createClient();
 
   const data = {
     ...rest,
-    full_name: `${name} ${lastName}`.trim(),
+    name,
+    lastname,
+    full_name: `${name} ${lastname}`.trim(),
     discharge_date: discharge_date === "" ? null : discharge_date,
   };
 

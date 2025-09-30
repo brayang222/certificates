@@ -11,8 +11,8 @@ import { toast } from "sonner";
 export const UserForm = ({ user }: { user?: Profile }) => {
   const [form, setForm] = useState({
     identification: "",
-    name: user ? user.full_name?.split(" ")[0] : "",
-    lastName: user ? user.full_name?.split(" ")[1] : "",
+    name: user ? user.name : "",
+    lastname: user ? user.lastname : "",
     phone: "",
     address: "",
     email: "",
@@ -105,15 +105,15 @@ export const UserForm = ({ user }: { user?: Profile }) => {
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="font-semibold" htmlFor="lastName">
+          <label className="font-semibold" htmlFor="lastname">
             Apellido
           </label>
           <input
-            value={form.lastName ?? ""}
+            value={form.lastname ?? ""}
             type="text"
-            name="lastName"
-            id="lastName"
-            autoComplete="lastName"
+            name="lastname"
+            id="lastname"
+            autoComplete="lastname"
             className="border rounded-sm border-black p-1"
             onChange={handleChange}
           />

@@ -7,7 +7,7 @@ import { updateUser } from "./updateUser";
 export async function createUser(user: Profile) {
   const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!);
   const { data, error } = await supabase.auth.admin.createUser({
-    email: user.email,
+    email: user.email.toLowerCase(),
     password: user.password,
     email_confirm: true,
   });
